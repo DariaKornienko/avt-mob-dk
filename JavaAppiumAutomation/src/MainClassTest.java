@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MainClassTest
@@ -5,12 +6,16 @@ public class MainClassTest
     MainClass check = new MainClass();
 
     @Test
-    public void testGetClassNumber()
+    public void testGetClassString()
     {
-        if (check.getClassNumber() > 45) {
-            System.out.println("this number is greater than 45");
+        String a = "Hello";
+        String b = "hello";
+        String text = check.getClassString();
+
+        if (text.contains(a) || text.contains(b)) {
+            System.out.println("Text contains “hello” or “Hello”");
         } else {
-            System.out.println("this number is not greater than 45");
+            Assert.fail("Substring not found");
         }
     }
 }

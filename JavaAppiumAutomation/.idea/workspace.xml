@@ -47,23 +47,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="57" />
+          <entry key="java" value="183" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="57" />
+          <entry key="JAVA" value="183" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#101#102#0" expanded="true" />
                 <element signature="e#126#127#0" expanded="true" />
@@ -72,11 +72,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainClassTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="289">
+              <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +102,8 @@
         <option value="$PROJECT_DIR$/src/CoreTestCase.java" />
         <option value="$PROJECT_DIR$/src/MathHelper.java" />
         <option value="$PROJECT_DIR$/src/MainTest.java" />
-        <option value="$PROJECT_DIR$/src/MainClassTest.java" />
         <option value="$PROJECT_DIR$/src/MainClass.java" />
+        <option value="$PROJECT_DIR$/src/MainClassTest.java" />
       </list>
     </option>
   </component>
@@ -144,7 +147,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539342738851" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539344296758" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -227,15 +230,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MainTest_myFirstTest - 2018.10.12 at 13h 26m 24s.xml">
-      <configuration name="MainTest.myFirstTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainClassTest_testGetLocalNumber - 2018.10.12 at 13h 26m 31s.xml">
-      <configuration name="MainClassTest.testGetLocalNumber" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainClassTest_testGetLocalNumber - 2018.10.12 at 13h 26m 38s.xml">
-      <configuration name="MainClassTest.testGetLocalNumber" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="MainClassTest - 2018.10.12 at 13h 26m 46s.xml">
       <configuration name="MainClassTest" configurationId="JUnit" />
     </history-entry>
@@ -257,6 +251,15 @@
     <history-entry file="MainClassTest - 2018.10.12 at 14h 11m 54s.xml">
       <configuration name="MainClassTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MainClassTest - 2018.10.12 at 14h 35m 31s.xml">
+      <configuration name="MainClassTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainClassTest - 2018.10.12 at 14h 35m 43s.xml">
+      <configuration name="MainClassTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainClassTest - 2018.10.12 at 14h 36m 46s.xml">
+      <configuration name="MainClassTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -268,7 +271,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12953092" />
@@ -306,20 +309,23 @@
     <entry file="file://$PROJECT_DIR$/src/MathHelper.java" />
     <entry file="file://$PROJECT_DIR$/src/CoreTestCase.java" />
     <entry file="file://$PROJECT_DIR$/src/MainTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/MainClassTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#101#102#0" expanded="true" />
             <element signature="e#126#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainClassTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
