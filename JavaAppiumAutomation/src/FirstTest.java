@@ -1,10 +1,14 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import sun.rmi.server.DeserializationChecker;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
@@ -23,7 +27,7 @@ public class FirstTest
         capabilities.setCapability("automationName","Appium");
         capabilities.setCapability("appPackage","org.wikipedia");
         capabilities.setCapability("appActivity",".main.MainActivity");
-        capabilities.setCapability("app","C://Users//new-user//Desktop//JavaAppiumAutomation//apks//org.wikipedia.apk");
+        //capabilities.setCapability("app","C://Users//new-user//Desktop//DK-JAA-master//JavaAppiumAutomation//apks//org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
@@ -35,8 +39,70 @@ public class FirstTest
     }
 
     @Test
-    public void firstTest()
+    public void testCompareText()
     {
-        System.out.println("First Test Run");
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Не найдено поле поиска или не сработал клик",
+                5
+        );
+
+        WebElement titel_element = waitForElementPresent(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Не найдено поле поиска",
+                15
+        );
+
+        String article_titel = titel_element.getAttribute("text");
+
+        Assert.assertEquals(
+                "No text",
+                //"Поиск",
+                "Search…",
+                article_titel
+        );
+    }
+
+    private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(
+                ExpectedConditions.presenceOfElementLocated(by)
+        );
+    }
+    private WebElement waitForElementPresent(By by, String error_message)
+    {
+        return waitForElementPresent(by, error_message, 5);
+    }
+
+    private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        element.click();
+        return element;
+    }
+
+    private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        element.sendKeys(value);
+        return element;
+    }
+
+    private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(
+                ExpectedConditions.invisibilityOfElementLocated(by)
+        );
+    }
+
+    private WebElement waitForElementAndClear(By by, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        element.clear();
+        return element;
     }
 }
