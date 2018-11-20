@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import jdk.jfr.events.SocketReadEvent;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -380,6 +381,190 @@ public class FirstTest
                 5
         );
 
+    }
+
+    @Test
+    public void ex5SavingTwoArticles()
+    {
+        //Первая статья
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Не найдено поле поиска или не сработал клик",
+                5
+        );
+
+        String search_line = "Java";
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Не удалось ввести текст поиска",
+                5
+        );
+
+        String search_result_locator =  "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='Object-oriented programming language']";
+        waitForElementAndClick(
+                By.xpath(search_result_locator),
+                "Статья не найдена",
+                5
+        );
+
+        String title_before = waitForElementAndGetAttribute(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "text",
+                "Заголовок не найден",
+                15
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']" ),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']" ),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Add to reading list']" ),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Add to reading list']" ),
+                //By.xpath("//*[@instance=2]"),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/onboarding_button" ),
+                "Не найдена кнопка подтверждения",
+                15
+        );
+
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/text_input"),
+                "Не удалось очистить поле ввода",
+                5
+        );
+
+        String name_of_folder = "Test";
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/text_input"),
+                name_of_folder,
+                "Не удалось ввести название списка",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("android:id/button1" ),
+                "Не найдена кнопка ОК",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']" ),
+                "Не удалось закрыть статью",
+                5
+        );
+
+        //Вторая статья
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Не найдено поле поиска или не сработал клик",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Не удалось ввести текст поиска",
+                5
+        );
+
+        search_result_locator =  "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='Island of Indonesia']";
+        waitForElementAndClick(
+                By.xpath(search_result_locator),
+                "Статья не найдена",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']"),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementAndClick(
+                //By.xpath("//*[@text='Add to reading list']" ),
+                By.xpath("//*[@instance=2]"),
+                "Не найдена кнопка дополнительных опций",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.TextView[@text='" + name_of_folder + "']"),
+                "Папка не найдена",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Не удалось закрыть статью",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
+                "Не удалось нажать на кнопку списков",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Нет списков для чтения",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Нет списков для чтения",
+                5
+        );
+
+        swipeElementToLeft(
+                By.xpath("//*[@text='island of Indonesia']"),
+               "Не удалось удалить статью"
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Java (programming language)']"),
+                "Не найдена вторая статья после удаления первой",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Java (programming language)']"),
+                "Не сработал клик по статье",
+                15
+        );
+
+        String title_after = waitForElementAndGetAttribute(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "text",
+                "Заголовок не найден",
+                15
+        );
+
+        Assert.assertEquals(
+                "Заголовок оставлейся статьи не совпадает сзаголовком первой стаьи",
+                title_after,
+                title_before
+        );
     }
 
 
