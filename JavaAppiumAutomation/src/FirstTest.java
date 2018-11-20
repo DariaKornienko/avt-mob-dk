@@ -2,6 +2,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import jdk.jfr.events.SocketReadEvent;
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -567,6 +568,35 @@ public class FirstTest
         );
     }
 
+    @Test
+    public void ex6AssertTitle()
+    {
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Не найдено поле поиска или не сработал клик",
+                5
+        );
+
+        String search_line = "Java";
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Не удалось ввести текст поиска",
+                5
+        );
+
+        String search_result_locator =  "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='Object-oriented programming language']";
+        waitForElementAndClick(
+                By.xpath(search_result_locator),
+                "Статья не найдена",
+                5
+        );
+
+        assertElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Заголовок статьи не найден"
+        );
+    }
 
 //    @Test
 //    public void ex4WordCheckInTheSearch()
@@ -727,5 +757,14 @@ public class FirstTest
     {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private void assertElementPresent(By by, String error_message)
+    {
+        String title = driver.findElement(by).getText();
+        if (title == null){
+            String default_message = "Заголовок '" + by.toString() + "' отсутствует";
+            throw new AssertionError(default_message + " " + error_message);
+        }
     }
 }
