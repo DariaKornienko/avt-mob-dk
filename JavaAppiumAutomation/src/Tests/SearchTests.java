@@ -16,6 +16,24 @@ public class SearchTests extends CoreTestCase
     }
 
     @Test
+    public void testEx3CancelSearch()
+    {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        int amount_of_elements = SearchPageObject.getAmountOfFoundArticles();
+
+        assertTrue(
+                "Статей не найдено",
+                amount_of_elements > 0
+        );
+
+        SearchPageObject.waitForCancelButtonToAppear();
+        SearchPageObject.clickCancelButton();
+        SearchPageObject.checkSearchFieldIsEmpty();
+    }
+
+    @Test
     public void testAmountOfNotEmptySearch()
     {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
