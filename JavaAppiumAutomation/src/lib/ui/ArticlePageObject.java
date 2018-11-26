@@ -2,19 +2,21 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
+import lib.Platform;
 
-public class ArticlePageObject extends MainPageObject
+abstract public class ArticlePageObject extends MainPageObject
 {
-    private static final String
-        TITLE = "id:org.wikipedia:id/view_page_title_text",
-        FOOTER_ELEMENT = "xpath://*[@text='View page in browser']",
-        OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']",
-        OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Add to reading list']",
-        ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
-        MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input",
-        MY_LIST_OK_BUTTON = "xpath://*[@text='OK']",
-        CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
-        MY_LIST_BY_NAME_TPL = "xpath://android.widget.TextView[@text='{MY_LIST_NAME}']";
+    protected static String
+            TITLE,
+            FOOTER_ELEMENT,
+            OPTIONS_BUTTON,
+            OPTIONS_ADD_TO_MY_LIST_BUTTON,
+            ADD_TO_MY_LIST_OVERLAY,
+            MY_LIST_NAME_INPUT,
+            MY_LIST_OK_BUTTON,
+            CLOSE_ARTICLE_BUTTON,
+            MY_LIST_BY_NAME_TPL,
+            CLOSE_ONBOARDING_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver)
     {
@@ -34,13 +36,22 @@ public class ArticlePageObject extends MainPageObject
     public String getArticleTitle()
     {
         WebElement title_element = waitForTitleElement();
-        return  title_element.getAttribute("text");
+        if (Platform.getInstance().isAndroid()) {
+            return title_element.getAttribute("text");
+        } else {
+            return title_element.getAttribute("name");
+        }
     }
 
     public void swipeToFooter()
     {
-        this.swipeUpToFindElement(FOOTER_ELEMENT,"Не найден конец страницы",20);
+        if (Platform.getInstance().isAndroid()){
+            this.swipeUpToFindElement(FOOTER_ELEMENT,"Не найден конец страницы",70);
+        } else {
+            this.swipeUpTitleElementAppear(FOOTER_ELEMENT,"Не найден конец страницы",70);
+        }
     }
+
 
     public void addArticleToMyList()
     {
@@ -76,6 +87,16 @@ public class ArticlePageObject extends MainPageObject
         String my_list_name = getListXpathByName(name_of_folder);
         this.waitForElementPresent(my_list_name, "Не удалось найти папку '" + my_list_name + "'");
         this.waitForElementAndClick(my_list_name,"Папка не найдена",15 );
+    }
+
+    public void addArticleToMySaved()
+    {
+        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Не удалось добавить статью в список", 10);
+    }
+
+    public void closeOnboardingButton()
+    {
+        this.waitForElementAndClick(CLOSE_ONBOARDING_BUTTON, "Не удалось закрыть онбординг", 10);
     }
 
     public void closeArticle()
